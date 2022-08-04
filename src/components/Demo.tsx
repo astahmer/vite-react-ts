@@ -1,5 +1,3 @@
-import { Box, Center, Heading, Switch } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import { useState } from "react";
 
 import { Show } from "./Show";
@@ -9,17 +7,19 @@ export const Demo = () => {
     const obj = isShown ? { text: "children" } : undefined;
 
     return (
-        <Center flexDirection="column" h="100%">
-            <motion.div animate={{ rotateX: 360 }} transition={{ duration: 1.5, repeat: Infinity }}>
-                <Box textAlign="center" fontSize="50px">
-                    Ready to go
-                </Box>
-            </motion.div>
-            <Heading>{isShown ? "Shown" : "Hidden"}</Heading>
-            <Switch onChange={() => setIsShown((current) => !current)} />
-            <Show when={isShown} fallback="fallback">
-                {() => obj.text}
-            </Show>
-        </Center>
+        <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+            <div style={{ display: "flex", flexDirection: "column", margin: "auto" }}>
+                <div style={{ textAlign: "center", fontSize: "50px" }}>Ready to go</div>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                    <h1>{isShown ? "Shown" : "Hidden"}</h1>
+                    <div>
+                        <input type="checkbox" onChange={() => setIsShown((current) => !current)} />
+                        <Show when={isShown} fallback="fallback">
+                            {() => obj.text}
+                        </Show>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
